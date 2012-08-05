@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ "x$1" == "x" ]; then
+    echo "Need a build dump"
+    exit 1
+fi
+
+DIST=$(chatham-dist $1)
+CPLR=$(chatham-compiler $1)
+TRIPPLE="$DIST-chatham-$CPLR"
+
+TMPDIR=$(mktemp -d)
+cd $TMPDIR
+
+$(chatham-dget $1)
+sbuild -A -c $TRIPPLE -d $DIST *dsc
+
+cd - > /dev/null
+rm -rf $TMPDIR
