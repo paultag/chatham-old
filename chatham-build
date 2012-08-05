@@ -20,6 +20,9 @@ cd $TMPDIR
 
 $(chatham-dget $FILE)
 sbuild -A -c $TRIPPLE -d $DIST *dsc
+BUILD_OK=$?
+
+chatham-postbuild $FILE $BUILD_OK
 
 cd - > /dev/null
 rm -rf $TMPDIR
