@@ -1,18 +1,24 @@
 #!/bin/bash
 
+abspath() {
+    echo `cd \`dirname $1\`; pwd`/`basename $1`;
+}
+
 if [ "x$1" == "x" ]; then
     echo "Need a build dump"
     exit 1
 fi
 
-DIST=$(chatham-dist $1)
-CPLR=$(chatham-compiler $1)
+FILE=$(abspath $1)
+
+DIST=$(chatham-dist $FILE)
+CPLR=$(chatham-compiler $FILE)
 TRIPPLE="$DIST-chatham-$CPLR"
 
 TMPDIR=$(mktemp -d)
 cd $TMPDIR
 
-$(chatham-dget $1)
+$(chatham-dget $FILE)
 sbuild -A -c $TRIPPLE -d $DIST *dsc
 
 cd - > /dev/null
