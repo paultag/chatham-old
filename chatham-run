@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+
+ssh tag@localhost monomoy builder-take localhost > monomoy.build
+chatham-build monomoy.build

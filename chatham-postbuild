@@ -11,13 +11,35 @@ dot = json.load(open(dotconf, 'r'))
 obj = json.load(open(sys.argv[1], 'r'))
 
 build_ok = sys.argv[2]
-
+eyedee = obj['_id']
 unique_id = obj['pool']
 
 path = "%s/%s" % (dot['result_root'], unique_id)
 ssh_string = "%s@%s" % (dot['login'], dot['master'])
 scp_string = "%s:%s" % (ssh_string, path)
 
-ssh(str(ssh_string), "mkdir", "-p", str(path))
-scp(glob.glob("*build"), str(scp_string))
-ssh(str(ssh_string), "echo %s > %s/%s" % (str(build_ok), str(path), "result"))
+ssh(
+    str(ssh_string),
+    "mkdir",
+    "-p",
+    str(path)
+)
+
+scp(
+    glob.glob("*build"),
+    str(scp_string)
+)
+
+ssh(str(ssh_string),
+    str("echo %s > %s/%s" % (
+        build_ok,
+        path,
+        ("result-" + eyedee)
+    ))
+)
+
+ssh(str(ssh_string),
+    "monomoy",
+    "builder-done",
+    str(eyedee)
+)
