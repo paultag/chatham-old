@@ -1,5 +1,13 @@
 #!/bin/bash
 set -e
 
-ssh tag@localhost monomoy builder-take localhost > monomoy.build
+ssh tag@lucifer.pault.ag monomoy builder-take leliel > monomoy.build
+chatham-sanity monomoy.build
+RET=$?
+
+if [ $RET -ne 0 ]; then
+    echo "Crapola"
+    exit 1
+fi
+
 chatham-build monomoy.build

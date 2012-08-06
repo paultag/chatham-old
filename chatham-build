@@ -18,6 +18,14 @@ TRIPPLE="$DIST-chatham-$CPLR"
 TMPDIR=$(mktemp -d)
 cd $TMPDIR
 
+echo ""
+echo " ===="
+echo ""
+echo " Tripple: $TRIPPLE"
+echo ""
+echo " ===="
+echo ""
+
 $(chatham-dget $FILE)
 sbuild -A -c $TRIPPLE -d $DIST *dsc
 BUILD_OK=$?
