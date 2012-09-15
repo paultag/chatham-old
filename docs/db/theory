@@ -1,0 +1,37 @@
+builders:
+
+
+    {
+        "name": "some_name",
+        "dns_name": "dns_name.domain.tld",
+        "owner": "joehacker",
+        "arch": "amd64",
+        "type": "manual",
+        "capabilities": [
+            "quantal",
+            "precise",
+            "oneiric",
+            "unstable",
+            "testing",
+            "stable"
+        ]
+    }
+
+    {
+        "name": "some_name",
+        "dns_name": "dns_name.domain.tld",
+        "owner": "joehacker",
+        "arch": "amd64",
+        "type": "aws",
+        "aws": {
+            "started_at": datetime,
+            "shutdown_at": null,
+            "status": "online",
+            "instance": "i-foobar",
+            "ami": "ami-foo",
+            "size": "t1.micro"
+        },
+        "capabilities": [
+            "unstable"
+        ]
+    }
