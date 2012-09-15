@@ -1,4 +1,0 @@
-#!/bin/bash
-set -e
-
-ssh tag@lucifer.pault.ag monomoy builder-ping leliel
