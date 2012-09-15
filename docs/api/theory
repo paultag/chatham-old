@@ -1,0 +1,72 @@
+HTTP
+
+    http://api.debuild.me/v1/%s
+
+    Global Params
+        - apikey  - Issued key. Randomish hex, SHA likely.
+
+    Response template:
+
+    keys:
+
+        "error": null
+
+        "error": {
+            "msg": "bleh blah blerg",
+            "id": "foo"
+        }
+
+
+    Endpoints:
+
+        - ping
+
+            update last seen record. should be done regularly, like 5 minutes
+            or so.
+
+        - take
+
+            take a build which is fit for this particular machine / arch. the
+            build will be marked as taken, and will only get released if the
+            node issues a release command, timeout is hit (e.g. no ping for
+            for 2 hours and build taken at least 2 hours ago, or whatever
+            the local policy is)
+
+            response:
+
+                build: {
+                    "src": "fluxbox",
+                    "version": "1.3.2-1~exp2",
+                    "dsc": "http://locker.debuild.me/pool/0/1/2/0123020301030402/fluxbox_1.3.2-1~exp2.dsc",
+                    "id": "0123020301030402"
+                }
+
+        - list
+
+            list all builds fit for this node. does not take a build, and
+            is only for debugging. returns a list of build take responses
+
+        - release
+
+            params:
+
+                build: "0123020301030402"
+
+        - done
+
+            params:
+
+                build: "0123020301030402"
+
+        - result (POST)
+
+            params:
+
+                build: "0123020301030402"
+                type: "lintian|buildlog|piuparts|pyflakes"
+                content: "foo\nbar\nbaz"
+
+            response:
+
+                do not commit twice, or error out
+                do not commit after done'd, or error out
