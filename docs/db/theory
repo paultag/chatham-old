@@ -35,3 +35,28 @@ builders:
             "unstable"
         ]
     }
+
+
+apikeys:
+
+    {
+        "key": "foobar",
+        "machine": "some_name",
+        "issued_date": datetime,
+        "revoked_date": null
+    }
+
+
+people:
+
+    {
+        "uid": "paultag",
+        "email": "paultag@debian.org",
+        "irc": "paultag",
+        "name": {
+            "first": "Paul",
+            "last": "Tagliamonte",
+            "nick": null
+        },
+        "webkey": "testpassword"
+    }
