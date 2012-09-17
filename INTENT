@@ -1,0 +1,6 @@
+Chatham manages builders, build queues, and provides an
+HTTP API for builders to talk over.
+
+
+chatham.builds
+chatham.builders
